@@ -6,6 +6,7 @@ import com.Library_Management_System.repository.GenreRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.stream.Collectors;
 @Component
 @RequiredArgsConstructor
@@ -59,5 +60,26 @@ public class GenreMapper {
                     .ifPresent(genre::setParentGenre);
         }
         return genre;
+    }
+
+    public void updateEntityFronDTO(GenreDTO dto,Genre existingGenre){
+        if(dto ==null || existingGenre == null){
+            return ;
+        }
+        existingGenre.setCode(dto.getCode());
+        existingGenre.setName(dto.getName());
+        existingGenre.setDescription(dto.getDescription());
+        existingGenre.setDisplayOrder(dto.getDisplayOrder()!=null ?dto.getDisplayOrder():0);
+        if (dto.getActive()!=null){
+            existingGenre.setActive(dto.getActive());
+        }
+        if (dto.getParentGenreId()!=null){
+            genreRepository.findById(dto.getParentGenreId())
+                    .ifPresent(existingGenre::setParentGenre);
+        }
+    }
+
+    public List<GenreDTO> toDTOList(List<Genre> genreList){
+        return genreList.stream().map(genre -> toDTO(genre)).collect(Collectors.toList());
     }
 }

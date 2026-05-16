@@ -45,37 +45,57 @@ public class GenreServiceImpl implements GenreService {
     }
 
     @Override
-    public GenreDTO updateGenre(Long id, GenreDTO genre) {
-        return null;
+    public GenreDTO updateGenre(Long id, GenreDTO genreDTO) throws GenreException {
+
+        Genre existingGenre = genreRepository.findById(id).orElseThrow(
+                ()-> new GenreException("genre not found")
+        );
+        genreMapper.updateEntityFronDTO(genreDTO,existingGenre);
+
+        Genre updatedGenre=genreRepository.save(existingGenre);
+
+        return genreMapper.toDTO(updatedGenre);
     }
 
     @Override
-    public void deleteGenre(Long id) {
-
+    public void deleteGenre(Long id) throws GenreException {
+        Genre existingGenre = genreRepository.findById(id).orElseThrow(
+                ()-> new GenreException("genre not found")
+        );
+        existingGenre.setActive(false);
     }
 
     @Override
-    public void hardDeleteGenre(Long genreId) {
-
+    public void hardDeleteGenre(Long genreId) throws GenreException {
+        Genre existingGenre = genreRepository.findById(genreId).orElseThrow(
+                ()-> new GenreException("genre not found")
+        );
+        genreRepository.delete(existingGenre);
     }
 
     @Override
     public List<GenreDTO> getAllActiveGenreWithSubGenres() {
-        return List.of();
+        List<Genre> topLevelGenres=genreRepository
+                .findByParentGenreIsNullAndActiveTrueOrderByDisplayOrderAsc();
+        return genreMapper.toDTOList(topLevelGenres);
     }
 
     @Override
     public List<GenreDTO> getTopLevelGenres() {
-        return List.of();
+        List<Genre> topLevelGenres=genreRepository
+                .findByParentGenreIsNullAndActiveTrueOrderByDisplayOrderAsc();
+        return genreMapper.toDTOList(topLevelGenres);
     }
 
     @Override
     public long getTotalActiveGenres() {
-        return 0;
+
+        return genreRepository.countByActiveTrue();
     }
 
     @Override
     public long getBookCountByGenre(Long genreId) {
+
         return 0;
     }
 

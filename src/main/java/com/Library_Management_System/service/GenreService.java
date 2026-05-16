@@ -14,10 +14,10 @@ public interface GenreService {
     List<GenreDTO> getAllGenres();
 
     GenreDTO getGenreById(Long id) throws GenreException;
-    GenreDTO updateGenre(Long id, GenreDTO genre);
-    void deleteGenre(Long id);
+    GenreDTO updateGenre(Long id, GenreDTO genre) throws GenreException;
+    void deleteGenre(Long id) throws GenreException;
 
-    void hardDeleteGenre(Long genreId);
+    void hardDeleteGenre(Long genreId) throws GenreException;
 
     List<GenreDTO> getAllActiveGenreWithSubGenres();
     List<GenreDTO> getTopLevelGenres();
