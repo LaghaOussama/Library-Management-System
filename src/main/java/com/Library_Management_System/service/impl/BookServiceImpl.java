@@ -85,7 +85,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public void hardDeleteBoook(Long bookId) throws BookException {
+    public void hardDeleteBook(Long bookId) throws BookException {
         Book existingBook=bookRepository.findById(bookId).orElseThrow(
                 ()->new BookException("book not found")
         );

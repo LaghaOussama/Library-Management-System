@@ -16,7 +16,7 @@ public interface BookService {
     BookDTO getBookByISBN(String isbn) throws BookException;
     BookDTO updateBook(Long bookId,BookDTO bookDTO) throws BookException;
     void deleteBook(Long bookId) throws BookException;
-    void hardDeleteBoook(Long bookId) throws BookException;
+    void hardDeleteBook(Long bookId) throws BookException;
 
     PageResponse<BookDTO> searchBooksWithFilters(BookSearchRequest searchRequest);
 
