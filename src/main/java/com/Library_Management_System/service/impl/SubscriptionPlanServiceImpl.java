@@ -64,8 +64,4 @@ public class SubscriptionPlanServiceImpl implements SubscriptionPlanService {
         return planList.stream().map(planMapper::toDTO).collect(Collectors.toList());
     }
 
-    @Override
-    public SubscriptionPlanDTO getSubscriptionPlan(Long planId) {
-        return null;
-    }
 }

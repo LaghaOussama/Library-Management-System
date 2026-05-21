@@ -19,7 +19,8 @@ import java.time.LocalDateTime;
 @Builder
 public class SubscriptionPlan {
 
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @NotBlank(message = "Plan code is mandatory")
