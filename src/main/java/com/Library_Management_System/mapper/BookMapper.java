@@ -59,7 +59,7 @@ public class BookMapper {
         if(dto.getGenreId()!=null){
             Genre genre =genreRepository.findById(dto.getGenreId())
                     .orElseThrow(()->new BookException("Genre with ID "+dto.getGenreId()
-                            +" notfound"));
+                            +" not found"));
                     book.setGenre(genre);
         }
         book.setPublisher(dto.getPublisher());
@@ -85,7 +85,7 @@ public class BookMapper {
         if(dto.getGenreId()!=null){
             Genre genre =genreRepository.findById(dto.getGenreId())
                     .orElseThrow(()->new BookException("Genre with ID "+dto.getGenreId()
-                    +" notfound"));
+                    +" not found"));
             book.setGenre(genre);
         }
         book.setPublisher(dto.getPublisher());

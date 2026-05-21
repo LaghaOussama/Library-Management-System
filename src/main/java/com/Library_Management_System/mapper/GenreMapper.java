@@ -38,8 +38,8 @@ public class GenreMapper {
 
 
         dto.setSubGenre(savedGenre.getSubGenres().stream()
-                .filter(subGenre-> subGenre.getActive())
-                .map(subGenre-> toDTO(subGenre)).collect(Collectors.toList()));
+                .filter(Genre::getActive)
+                .map(this::toDTO).collect(Collectors.toList()));
         }
         //dto.setBookCount();
         return dto;
@@ -80,6 +80,6 @@ public class GenreMapper {
     }
 
     public List<GenreDTO> toDTOList(List<Genre> genreList){
-        return genreList.stream().map(genre -> toDTO(genre)).collect(Collectors.toList());
+        return genreList.stream().map(this::toDTO).collect(Collectors.toList());
     }
 }
