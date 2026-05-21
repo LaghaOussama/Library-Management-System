@@ -21,25 +21,19 @@ import java.util.List;
 public class bookController {
 
     private final BookService bookService;
-    @PostMapping
-    public ResponseEntity<BookDTO>createBook(
-            @Valid @RequestBody BookDTO bookDTO) throws BookException {
-        BookDTO cretedBook=bookService.createBook(bookDTO);
-        return ResponseEntity.ok(cretedBook);
-    }
 
     @PostMapping("/bulk")
     public ResponseEntity<?>createBookBulk(
             @Valid @RequestBody List<BookDTO> bookDTOs) throws BookException {
-        List<BookDTO> cretedBooks=bookService.createBookBulk(bookDTOs);
-        return ResponseEntity.ok(cretedBooks);
+        List<BookDTO> createdBooks=bookService.createBookBulk(bookDTOs);
+        return ResponseEntity.ok(createdBooks);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<BookDTO>getBookById(
             @PathVariable("id") Long id) throws BookException {
-        BookDTO cretedBook=bookService.getBookById(id);
-        return ResponseEntity.ok(cretedBook);
+        BookDTO createdBook=bookService.getBookById(id);
+        return ResponseEntity.ok(createdBook);
     }
 
     /*@GetMapping("/isbn/{isbn}")
